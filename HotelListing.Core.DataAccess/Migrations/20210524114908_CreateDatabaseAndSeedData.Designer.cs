@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelListing.Core.DataAccess.Migrations
 {
     [DbContext(typeof(CoreDatabaseContext))]
-    [Migration("20210524112051_DatabaseCreated")]
-    partial class DatabaseCreated
+    [Migration("20210524114908_CreateDatabaseAndSeedData")]
+    partial class CreateDatabaseAndSeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,26 @@ namespace HotelListing.Core.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "United Stated",
+                            ShortName = "USA"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Poland",
+                            ShortName = "PL"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Norway",
+                            ShortName = "NOR"
+                        });
                 });
 
             modelBuilder.Entity("HotelListing.Core.Models.Hotel", b =>
@@ -59,14 +79,48 @@ namespace HotelListing.Core.DataAccess.Migrations
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
+                    b.Property<string>("Rating")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
 
                     b.ToTable("Hotels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Busy Street 3",
+                            CountryId = 1,
+                            Name = "Arcadia",
+                            Rating = "4.6"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Tetris 28",
+                            CountryId = 1,
+                            Name = "Pearl",
+                            Rating = "3.2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "Marshal's 42",
+                            CountryId = 2,
+                            Name = "Portos",
+                            Rating = "4.1"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "Marble Street 1",
+                            CountryId = 3,
+                            Name = "SolidOne",
+                            Rating = "5"
+                        });
                 });
 
             modelBuilder.Entity("HotelListing.Core.Models.Hotel", b =>

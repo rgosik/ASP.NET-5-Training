@@ -2,7 +2,7 @@
 
 namespace HotelListing.Core.DataAccess.Migrations
 {
-    public partial class DatabaseCreated : Migration
+    public partial class CreateDatabaseAndSeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,7 @@ namespace HotelListing.Core.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
-                    Rating = table.Column<double>(type: "float", nullable: false),
+                    Rating = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CountryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -46,6 +46,36 @@ namespace HotelListing.Core.DataAccess.Migrations
                         principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                schema: "core",
+                table: "Countries",
+                columns: new[] { "Id", "Name", "ShortName" },
+                values: new object[] { 1, "United Stated", "USA" });
+
+            migrationBuilder.InsertData(
+                schema: "core",
+                table: "Countries",
+                columns: new[] { "Id", "Name", "ShortName" },
+                values: new object[] { 2, "Poland", "PL" });
+
+            migrationBuilder.InsertData(
+                schema: "core",
+                table: "Countries",
+                columns: new[] { "Id", "Name", "ShortName" },
+                values: new object[] { 3, "Norway", "NOR" });
+
+            migrationBuilder.InsertData(
+                schema: "core",
+                table: "Hotels",
+                columns: new[] { "Id", "Address", "CountryId", "Name", "Rating" },
+                values: new object[,]
+                {
+                    { 1, "Busy Street 3", 1, "Arcadia", "4.6" },
+                    { 2, "Tetris 28", 1, "Pearl", "3.2" },
+                    { 3, "Marshal's 42", 2, "Portos", "4.1" },
+                    { 4, "Marble Street 1", 3, "SolidOne", "5" }
                 });
 
             migrationBuilder.CreateIndex(
