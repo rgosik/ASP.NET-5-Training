@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using System;
@@ -27,6 +28,11 @@ namespace HotelListing.Core.Logging
             });
 
             return builder;
+        }
+
+        public static void ConfigureSerilogLogging(this IApplicationBuilder app)
+        {
+            app.UseSerilogRequestLogging();
         }
     }
 }
