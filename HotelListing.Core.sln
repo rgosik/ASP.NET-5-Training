@@ -7,9 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelListing.Core.WebApi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelListing.Core", "HotelListing.Core\HotelListing.Core.csproj", "{14BCF8F0-34B0-4DD3-86C8-26A7AC6CDAEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelListing.Core.DataAccess", "HotelListing.Core.DataAccess\HotelListing.Core.DataAccess.csproj", "{41719AD7-1CDC-4ABF-A320-3321F0EBDE25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelListing.Core.DataAccess", "HotelListing.Core.DataAccess\HotelListing.Core.DataAccess.csproj", "{41719AD7-1CDC-4ABF-A320-3321F0EBDE25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelListing.Core.Models", "HotelListing.Core.Models\HotelListing.Core.Models.csproj", "{66ECA1A7-BB10-46CB-A150-46723320C697}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelListing.Core.Models", "HotelListing.Core.Models\HotelListing.Core.Models.csproj", "{66ECA1A7-BB10-46CB-A150-46723320C697}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelListing.Commons", "HotelListing.Commons\HotelListing.Commons.csproj", "{6F569223-1528-4484-9A4C-EEE422ACA948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelListing.Core.BLL", "HotelListing.Core.BLL\HotelListing.Core.BLL.csproj", "{BFC53EB1-B569-44D7-A838-6F767F878FB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{66ECA1A7-BB10-46CB-A150-46723320C697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66ECA1A7-BB10-46CB-A150-46723320C697}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66ECA1A7-BB10-46CB-A150-46723320C697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F569223-1528-4484-9A4C-EEE422ACA948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F569223-1528-4484-9A4C-EEE422ACA948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F569223-1528-4484-9A4C-EEE422ACA948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F569223-1528-4484-9A4C-EEE422ACA948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC53EB1-B569-44D7-A838-6F767F878FB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC53EB1-B569-44D7-A838-6F767F878FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC53EB1-B569-44D7-A838-6F767F878FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC53EB1-B569-44D7-A838-6F767F878FB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelListing.Core.DataAccess.Repositories.Interfaces
+namespace HotelListing.Core.DataAccess.Repository.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

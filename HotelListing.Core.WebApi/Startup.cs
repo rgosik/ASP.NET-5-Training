@@ -1,3 +1,4 @@
+using HotelListing.Core.BLL.Profiles;
 using HotelListing.Core.DataAccess;
 using HotelListing.Core.Logging;
 using Microsoft.AspNetCore.Builder;
@@ -13,18 +14,19 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HotelListing.Core.WebApi
 {
     public class Startup
     {
+        private IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,12 +35,14 @@ namespace HotelListing.Core.WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
             );
 
-                services.AddCors(o => {
-                    o.AddPolicy("AllowAll", builder =>
-                        builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
+            services.AddCors(o => {
+                o.AddPolicy("AllowAll", builder =>
+                    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             });
+
+            services.AddAutoMapper(typeof(MapperInitializer));
 
             services.AddSwaggerGen(c =>
             {

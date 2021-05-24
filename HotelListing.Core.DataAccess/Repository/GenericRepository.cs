@@ -1,4 +1,4 @@
-﻿using HotelListing.Core.DataAccess.Repositories.Interfaces;
+﻿using HotelListing.Core.DataAccess.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelListing.Core.DataAccess.Repositories
+namespace HotelListing.Core.DataAccess.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {

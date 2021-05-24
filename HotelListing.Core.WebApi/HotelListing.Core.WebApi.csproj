@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HotelListing.Core.BLL\HotelListing.Core.BLL.csproj" />
     <ProjectReference Include="..\HotelListing.Core.DataAccess\HotelListing.Core.DataAccess.csproj" />
     <ProjectReference Include="..\HotelListing.Core\HotelListing.Core.csproj" />
   </ItemGroup>
