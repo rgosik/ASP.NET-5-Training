@@ -15,7 +15,7 @@ namespace HotelListing.Core.Logging
         {
             builder.UseSerilog();
 
-            builder.ConfigureServices((builderContext, services) => 
+            builder.ConfigureServices((services) => 
             {
                 Log.Logger = new LoggerConfiguration()
                     .WriteTo.File(

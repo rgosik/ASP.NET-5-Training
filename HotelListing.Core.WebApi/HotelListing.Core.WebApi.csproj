@@ -12,4 +12,8 @@
     <ProjectReference Include="..\HotelListing.Core\HotelListing.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
