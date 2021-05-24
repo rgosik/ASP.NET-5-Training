@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HotelListing.Commons\HotelListing.Commons.csproj" />
+    <ProjectReference Include="..\HotelListing.Core.DataAccess\HotelListing.Core.DataAccess.csproj" />
     <ProjectReference Include="..\HotelListing.Core.Models\HotelListing.Core.Models.csproj" />
   </ItemGroup>
 

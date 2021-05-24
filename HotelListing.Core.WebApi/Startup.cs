@@ -1,26 +1,23 @@
-using HotelListing.Core.BLL.Profiles;
-using HotelListing.Core.DataAccess;
+using Autofac;
+using HotelListing.Core.BLL.Autofac;
+using HotelListing.Core.BLL.Interfaces;
+using HotelListing.Core.BLL.Services;
+using HotelListing.Core.DataAccess.Repository;
+using HotelListing.Core.DataAccess.Repository.Interfaces;
 using HotelListing.Core.Logging;
+using HotelListing.Core.WebApi.Autofac;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace HotelListing.Core.WebApi
 {
     public class Startup
     {
+        private static readonly Assembly WebApiAssembly = typeof(HotelListingWebapiModule).Assembly;
+        private static readonly Assembly BllAssembly = typeof(HotelListingServicesModule).Assembly;
         private IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -28,12 +25,8 @@ namespace HotelListing.Core.WebApi
             Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CoreDatabaseContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
-            );
 
             services.AddCors(o => {
                 o.AddPolicy("AllowAll", builder =>
@@ -42,17 +35,23 @@ namespace HotelListing.Core.WebApi
                     .AllowAnyHeader());
             });
 
-            services.AddAutoMapper(typeof(MapperInitializer));
+            services.AddAutoMapper(WebApiAssembly, BllAssembly);
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelListing", Version = "v1" });
             });
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(op => 
+                op.SerializerSettings.ReferenceLoopHandling = 
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule<HotelListingWebapiModule>();
+        }
+
         public void Configure(IApplicationBuilder app)
         {
             app.UseSwagger();

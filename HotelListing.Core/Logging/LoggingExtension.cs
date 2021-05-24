@@ -21,8 +21,10 @@ namespace HotelListing.Core.Logging
                 Log.Logger = new LoggerConfiguration()
                     .WriteTo.File(
                     path: "d:\\VSLogs\\HotelListing\\log-.txt",
-                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exceprion}",
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
                     rollingInterval: RollingInterval.Day,
+                    buffered: true,
+                    retainedFileCountLimit: 1,
                     restrictedToMinimumLevel: LogEventLevel.Information)
                     .CreateLogger();
             });

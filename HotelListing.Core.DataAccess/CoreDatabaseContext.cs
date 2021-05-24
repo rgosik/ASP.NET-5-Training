@@ -1,5 +1,6 @@
 ﻿using HotelListing.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,24 @@ namespace HotelListing.Core.DataAccess
     public class CoreDatabaseContext : DbContext
     {
         private const string DatabaseSchemaName = "core";
-        public CoreDatabaseContext(DbContextOptions options) : base(options)
-        { }
+        private readonly ILoggerFactory _loggerFactory;
+
+        public CoreDatabaseContext(DbContextOptions options, ILoggerFactory loggerFactory) : base(options)
+        {
+            _loggerFactory = loggerFactory;
+        }
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (_loggerFactory != null)
+            {
+                optionsBuilder.UseLoggerFactory(_loggerFactory);
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {
