@@ -1,5 +1,4 @@
 ﻿using HotelListing.Commons.DataTransferObjects;
-using HotelListing.Core.DataAccess.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HotelListing.Core.BLL.Interfaces
 {
-    public interface ICountryService
+    public interface IHotelService
     {
-        Task<IEnumerable<CountryDTO>> GetAllCountriesAsync();
-        Task<CountryDTO> GetCountryAsync(int id);
+        Task<IList<HotelDTO>> GetAllHotelsAsync();
+        Task<HotelDTO> GetHotelAsync(int id);
     }
 }

@@ -11,47 +11,46 @@ using System.Threading.Tasks;
 
 namespace HotelListing.Core.BLL.Services
 {
-    public class CountryService : ICountryService
+    public class HotelService : IHotelService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<CountryService> _logger;
+        private readonly ILogger<HotelService> _logger;
         private readonly IMapper _mapper;
 
-        public CountryService(IUnitOfWork unitOfWork, ILogger<CountryService> logger, IMapper mapper)
+        public HotelService(IUnitOfWork unitOfWork, ILogger<HotelService> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CountryDTO>> GetAllCountriesAsync()
+        public async Task<IList<HotelDTO>> GetAllHotelsAsync()
         {
             try
             {
-                var countries = await _unitOfWork.Countries.GetAll();
+                var hotels = await _unitOfWork.Hotels.GetAll();
 
-                return _mapper.Map<IList<CountryDTO>>(countries);
+                return  _mapper.Map<IList<HotelDTO>>(hotels);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"An Error occured in the {nameof(GetAllCountriesAsync)}");
+                _logger.LogError(ex, $"An Error occured in the {nameof(GetAllHotelsAsync)}");
                 throw;
             }
         }
 
-        public async Task<CountryDTO> GetCountryAsync(int id)
+        public async Task<HotelDTO> GetHotelAsync(int id)
         {
             try
             {
-                var country = await _unitOfWork.Countries
-                    .Get(x => x.Id == id,
-                    new List<string> { "Hotels" });
+                var hotel = await _unitOfWork.Hotels
+                    .Get(x => x.Id == id);
 
-                return _mapper.Map<CountryDTO>(country);
+                return _mapper.Map<HotelDTO>(hotel);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"An Error occured in the {nameof(GetCountryAsync)}");
+                _logger.LogError(ex, $"An Error occured in the {nameof(GetHotelAsync)}");
                 throw;
             }
         }

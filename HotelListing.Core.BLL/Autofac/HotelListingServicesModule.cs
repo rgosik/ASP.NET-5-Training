@@ -18,6 +18,9 @@ namespace HotelListing.Core.BLL.Autofac
 
             builder.RegisterType<CountryService>()
                 .As<ICountryService>();
+
+            builder.RegisterType<HotelService>()
+                .As<IHotelService>();
         }
     }
 }

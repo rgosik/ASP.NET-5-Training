@@ -22,9 +22,17 @@ namespace HotelListing.Core.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CountryDTO>> GetAllAsync()
+        public async Task<IEnumerable<CountryDTO>> GetAllCountriesAsync()
         {
-            return await _countryService.GetCountriesAsync();
+            return await _countryService.GetAllCountriesAsync();
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<CountryDTO> GetCountryAsync(int id) 
+        {
+            return await _countryService.GetCountryAsync(id);
+        }
+
+
     }
 }
