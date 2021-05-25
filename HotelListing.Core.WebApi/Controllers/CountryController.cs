@@ -1,5 +1,6 @@
 ﻿using HotelListing.Commons.DataTransferObjects;
 using HotelListing.Core.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -22,12 +23,14 @@ namespace HotelListing.Core.WebApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IEnumerable<CountryDTO>> GetAllCountriesAsync()
         {
             return await _countryService.GetAllCountriesAsync();
         }
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<CountryDTO> GetCountryAsync(int id) 
         {
             return await _countryService.GetCountryAsync(id);

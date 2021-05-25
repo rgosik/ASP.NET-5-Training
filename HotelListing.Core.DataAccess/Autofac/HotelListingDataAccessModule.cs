@@ -20,7 +20,8 @@ namespace HotelListing.Core.DataAccess.Autofac
             {
                 var config = c.Resolve<IConfiguration>();
                 var loggerFactory = c.Resolve<ILoggerFactory>();
-                var opt = new DbContextOptionsBuilder<CoreDatabaseContext>();
+                var opt = new DbContextOptionsBuilder<CoreDatabaseContext>()
+                    .EnableSensitiveDataLogging();
                 opt.UseSqlServer(config.GetConnectionString("sqlConnection"));
 
                 return new CoreDatabaseContext(opt.Options, loggerFactory);

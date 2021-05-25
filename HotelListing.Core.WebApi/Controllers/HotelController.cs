@@ -1,5 +1,6 @@
 ﻿using HotelListing.Commons.DataTransferObjects;
 using HotelListing.Core.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,12 +24,14 @@ namespace HotelListing.Core.WebApi.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async Task<IList<HotelDTO>> GetAllHotelsAsync()
         {
             return await _hotelService.GetAllHotelsAsync();
         }
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<HotelDTO> GetHotelAsync(int id)
         {
             return await _hotelService.GetHotelAsync(id);

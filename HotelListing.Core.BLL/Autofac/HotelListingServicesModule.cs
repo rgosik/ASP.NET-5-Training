@@ -21,6 +21,9 @@ namespace HotelListing.Core.BLL.Autofac
 
             builder.RegisterType<HotelService>()
                 .As<IHotelService>();
+
+            builder.RegisterType<AuthManager>()
+                .As<IAuthManager>();
         }
     }
 }

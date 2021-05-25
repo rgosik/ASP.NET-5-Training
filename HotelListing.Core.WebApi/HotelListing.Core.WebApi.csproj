@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HotelListing.Core.BLL\HotelListing.Core.BLL.csproj" />
-    <ProjectReference Include="..\HotelListing.Core.DataAccess\HotelListing.Core.DataAccess.csproj" />
     <ProjectReference Include="..\HotelListing.Core\HotelListing.Core.csproj" />
   </ItemGroup>
 

@@ -5,8 +5,10 @@ using HotelListing.Core.BLL.Services;
 using HotelListing.Core.DataAccess.Repository;
 using HotelListing.Core.DataAccess.Repository.Interfaces;
 using HotelListing.Core.Logging;
+using HotelListing.Core.StartupExtensions;
 using HotelListing.Core.WebApi.Autofac;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -27,6 +29,9 @@ namespace HotelListing.Core.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
 
             services.AddCors(o => {
                 o.AddPolicy("AllowAll", builder =>
@@ -65,6 +70,7 @@ namespace HotelListing.Core.WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
