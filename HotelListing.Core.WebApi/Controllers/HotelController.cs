@@ -1,4 +1,5 @@
 ﻿using HotelListing.Commons.DataTransferObjects;
+using HotelListing.Commons.Enums;
 using HotelListing.Core.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,11 +31,25 @@ namespace HotelListing.Core.WebApi.Controllers
             return await _hotelService.GetAllHotelsAsync();
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetHotel")]
         [Authorize]
         public async Task<HotelDTO> GetHotelAsync(int id)
         {
             return await _hotelService.GetHotelAsync(id);
         }
+
+        [HttpPost]
+        [Authorize(Roles = nameof(Roles.Administrator))]
+        public async Task<IActionResult> CreateHotelAsync([FromBody] CreateHotelDTO hotelDTO)
+        {
+            var result = await _hotelService.CreateHotelAsync(hotelDTO, ModelState.IsValid);
+
+            if (result.Succesful)
+            {
+                return CreatedAtRoute("GetHotel", new { id = result.Content.Id }, result.Content);
+            }
+            return StatusCode(result.StatusCode, result.Message);
+        }
+
     }
 }

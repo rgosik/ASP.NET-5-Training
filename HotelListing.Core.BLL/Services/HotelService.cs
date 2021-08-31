@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using HotelListing.Commons;
 using HotelListing.Commons.DataTransferObjects;
 using HotelListing.Core.BLL.Interfaces;
 using HotelListing.Core.DataAccess.Repository.Interfaces;
+using HotelListing.Core.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -52,6 +54,29 @@ namespace HotelListing.Core.BLL.Services
             {
                 _logger.LogError(ex, $"An Error occured in the {nameof(GetHotelAsync)}");
                 throw;
+            }
+        }
+
+        public async Task<ValidationResult<HotelDTO>> CreateHotelAsync(CreateHotelDTO hotelDTO, bool modelStateIsValid)
+        {
+            if (!modelStateIsValid)
+            {
+                _logger.LogError($"Invalid POST attempt in {nameof(CreateHotelAsync)}");
+                return new ValidationResult<HotelDTO>(null, 400, false);
+            }
+
+            try
+            {
+                var hotel = _mapper.Map<Hotel>(hotelDTO);
+                await _unitOfWork.Hotels.Insert(hotel);
+                await _unitOfWork.Save();
+
+                return new ValidationResult<HotelDTO>(_mapper.Map<HotelDTO>(hotel), 200, true);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something Went Wrong in the {nameof(CreateHotelAsync)}");
+                return new ValidationResult<HotelDTO>(null, 500, false, "Internal Server Error. Please Try Again Later.");
             }
         }
     }

@@ -26,7 +26,7 @@ namespace HotelListing.Commons.DataTransferObjects
 
     public class HotelDTO : CreateHotelDTO
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public CountryDTO Country { get; set; }
     }
 }

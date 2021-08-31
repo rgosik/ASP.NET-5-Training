@@ -1,4 +1,5 @@
-﻿using HotelListing.Commons.DataTransferObjects;
+﻿using HotelListing.Commons;
+using HotelListing.Commons.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace HotelListing.Core.BLL.Interfaces
     {
         Task<IList<HotelDTO>> GetAllHotelsAsync();
         Task<HotelDTO> GetHotelAsync(int id);
+        Task<ValidationResult<HotelDTO>> CreateHotelAsync(CreateHotelDTO hotelDTO, bool modelStateIsValid);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using HotelListing.Commons.Enums;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -16,13 +17,13 @@ namespace HotelListing.Core.DataAccess.Entities
             builder.HasData(
                 new IdentityRole
                 {
-                    Name = "User",
-                    NormalizedName = "USER"
+                    Name = nameof(Roles.User),
+                    NormalizedName = nameof(Roles.User).ToUpper()
                 },
                 new IdentityRole
                 {
-                    Name = "Administrator",
-                    NormalizedName = "ADMINISTRATOR"
+                    Name = nameof(Roles.Administrator),
+                    NormalizedName = nameof(Roles.Administrator).ToUpper()
                 }
             );
         }

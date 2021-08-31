@@ -62,6 +62,8 @@ namespace HotelListing.Core.WebApi.Controllers
                         return BadRequest(ModelState);
                     }
                     await _userManager.AddToRolesAsync(user, userDTO.Roles);
+                    scope.Complete();
+
                     return Accepted();
                 }
                 catch (Exception ex)

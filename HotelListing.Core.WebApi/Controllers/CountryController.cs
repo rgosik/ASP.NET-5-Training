@@ -1,4 +1,5 @@
 ﻿using HotelListing.Commons.DataTransferObjects;
+using HotelListing.Commons.Enums;
 using HotelListing.Core.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,13 +30,15 @@ namespace HotelListing.Core.WebApi.Controllers
             return await _countryService.GetAllCountriesAsync();
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetCountry")]
         [Authorize]
         public async Task<CountryDTO> GetCountryAsync(int id) 
         {
             return await _countryService.GetCountryAsync(id);
         }
 
+        //[HttpPost]
+        //[Authorize(Roles = nameof(Roles.Administrator))]
 
     }
 }
